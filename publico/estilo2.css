@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+:root{
+    --Azul:#353fce;
+    --Preta:#000000;
+    --Branca: #ffffff;
+}
+body{
+    font-family: 'Roboto';   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 300px;
+}
+#desconectado{
+    display: block;
+}
+
+#desconectado button{
+    background-color: var(--Azul);
+    color: var(--Branca);
+    border: none;
+   width: 200px;
+    height: 30px;
+   margin-left: 20px;
+   cursor: pointer;
+   border-radius: 2px 2px 2px 2px;
+}
+a{
+    color: var(--Branca);
+    text-decoration: none;
+}

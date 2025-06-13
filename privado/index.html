@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title> </title>
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-straight/css/uicons-solid-straight.css'>
+  <link rel="stylesheet" href="/estilo_index"/>
+</head>
+<body>
+  <div class="container">
+    <div class="sidebar"> 
+      <div class="logo">
+        <img src="/img" alt="Logo da Empresa" />
+      </div>
+      <div class="menu">
+        <ul>
+          <li><a id="formulario_cad_fun"><i class="fi fi-sr-add"></i> Cadastrar Funcionário</a></li>
+          <li><a id="formulario_cad_filial"><i class="fi fi-sr-add"></i> Cadastrar Filial</a></li>
+          <li><a id="formulario_gen_fun"> <i class="fi fi-sr-document"></i> Gerenciar Funcionários</a></li>
+          <li><a href="/logout"><i class="fi fi-ss-leave" id="sair_da_pagina"></i> Sair</a></li>  
+        </ul>
+     </div>
+    </div>
+    <div class="content">
+      <h2>Bem Vindo(a)!</h2>
+      <p>Selecione uma opção ao lado para começar.</p>
+      
+    </div>
+    <div class="container_gen_fun">
+      <div class="Administrativo">
+        <h1> Administrativo </h1>
+      </div>
+      <div class="Financeiro">
+        <h1> Financeiro </h1>
+      </div>
+      <div class="Suporte">
+        <h1> Suporte </h1>
+      </div>
+    </div>
+  </div>
+  <!-- Fim da tela inicial -->
+    <div id="tela_escura">
+      <div id="cadastro_filial">
+          <button id="btn_fechar">X</button> 
+          <h1 >Cadastrar Filial</h1> <br>
+          <label for="">Nome Filial</label> <br>
+          <input type="text" id="nome_filial" placeholder="nome filial"> <br> <br>
+          <label for="">Endereço</label> <br>
+          <input type="text" id="endereco" placeholder="endereço"> <br> <br>
+          <button id="btn_cad2">Cadastrar</button> <br>
+      </div>
+      <!-- Fim do primeiro form -->
+      <div id="cadastro_funcionario">
+        <button id="btn_fechar1">X</button> <br> <br> 
+        <h1>Cadastrar Funcionário</h1> <br> 
+        <label >Nome</label>  <br>
+        <input type="text" id="nome" placeholder="nome"> <br> <br>
+        <label >Filial</label><br>
+        <select  id="caixa_filial"><option value="">Selecione</option></select> <br><br>
+            <label >Salário</label> <br>
+            <input type="text" id="salario" placeholder="salario"> <br> <br>
+                <label >Setor</label><br>
+              <select  id="caixa_setor">
+                <option value="">Selecione</option>
+                <option value="Administrativo">Administrativo</option>
+                <option value="Financeiro">Financeiro</option>
+                <option value="Suporte">Suporte</option>                
+            </select> <br><br>
+            <label >Status</label> <br>
+              <select  id="caixa_situacao">
+                <option value="">Selecione</option>
+                <option value="Ativo">Ativo</option>
+                <option value="Inativo">Inativo</option>            
+            </select> <br><br>
+            <button id="btn_cad">Cadastrar</button> <br>
+          </div>
+      <div id="formulario_alterar">
+        <button id="btn_fechar1">X</button> 
+        <h1>Alterar Funcionário</h1> <br>
+        <label for="">Matrícula</label> <br> 
+        <input type="text" id="matricula2"> <br> <br>
+        <label for="">Nome</label> <br> 
+        <input type="text" id="nome2" placeholder="Nome Completo de Exemplo"> <br> <br>
+        <label >Filial</label> <br>
+         <select id="caixa_filial2"> 
+                <option value="">Selecione</option>               
+        </select> <br><br>
+        <label >Salário</label> <br>
+        <input type="text" id="salario2" placeholder="salário"> <br> <br>
+        <label for="">Setor</label> <br>
+        <select  id="setor2">
+                <option value="">Selecione</option>
+                <option value="Administrativo">Administrativo</option>
+                <option value="Financeiro">Financeiro</option>
+                <option value="Suporte">Suporte</option>                    
+            </select> <br><br>
+            <label >Status</label> <br>
+            <select  id="status2">
+                <option value="">Selecione</option>
+                <option value="Ativo">Ativo</option>
+                <option value="Inativo">Inativo</option>   
+            </select> <br><br>
+            <button id="salvar" >Salvar alterações</button>
+            <button id="exclui">Excluir</button>
+          </div>
+    </div>
+    <script src="/funcoes"></script>
+</body>
+</html>

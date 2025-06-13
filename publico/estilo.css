@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+:root{
+    --Azul:#353fce;
+    --Preta:#000000;
+    --Branca: #ffffff;
+}
+body{
+    background-color: var(--Azul);
+    font-family: 'Roboto';
+}
+
+#formulario_login_senha{
+    width: fit-content;
+    height: fit-content;
+    padding: 20px;
+    border-radius: 10px 10px 10px 10px;
+    background-color: var(--Branca);
+    box-shadow: 0px 0px 15px;
+    
+}
+
+#formulario{
+    margin-top: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#formulario_login_senha input{
+    margin-left: 10px;
+    width: 250px;
+    height: 30px;
+    border-radius: 10px 10px 10px 10px;
+}
+
+#btn_entrar{
+    padding: 3px;
+    border: none;
+    width: 120px;
+    height: 27px;
+    margin-left: 12px;
+    background-color: var(--Azul);
+    border-radius: 2px 2px 2px 2px;
+    color: var(--Branca);
+    cursor: pointer;
+}
+
+#btn_login{
+    margin: 10px;
+}
+#btn_senha{
+    margin: 10px;
+}
+
+#btn_fechar{
+     margin-left: 250px;
+     background-color: var(--Preta);
+     color: var(--Branca);
+     border: none;
+     width: 30px;
+     height: 25px;
+     border-radius: 2px 2px 2px 2px ;
+     cursor: pointer;
+}
+
+#formulario_login_senha input{
+   padding-left: 6px;
+}
