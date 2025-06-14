@@ -1,24 +1,4 @@
 //funcoes
-
-function CarregarFiliais() {
-    $.ajax({
-        url: 'http://localhost:3000/filial',
-        type: 'GET',
-        dataType: 'json',
-        contentType: 'application/json',
-        success: function (dados) {
-            dados.forEach(function (item) {
-                $("#caixa_filial").append(`
-                    <option value="${item.codigo_filial}">${item.nome_filial}</option>
-                `)
-            });
-        },
-        error: function () {
-            alert("Falha ao acessar o Endpoint GET /filial");
-        }
-    });
-}
-
 function CarregarAdministrativo() {
     $.ajax({
         url: 'http://localhost:3000/Administrativo',
@@ -31,7 +11,7 @@ function CarregarAdministrativo() {
                     <div class='cartoes'>
                         Nº Matrícula: <b id='matricula'>${item.matricula}</b><br>
                         Nome Completo: <b id='nome'>${item.nome_funcionario}</b><br>
-                        Nome Filial: <b id='nome_filial'>${item.nome_filial}</b><br>
+                        Nome Filial: <b id='filial1'>${item.nome_filial}</b><br>
                         R$ <b id='salario'>${item.salario}</b><br>
                         Setor: <b id='setor'>${item.setor}</b><br>
                         Status: <b id='status'>${item.status}</b><br>
@@ -58,7 +38,7 @@ function CarregarSuporte() {
                     <div class='cartoes'>
                         Nº Matrícula: <b id='matricula'>${item.matricula}</b><br>
                         Nome Completo: <b id='nome'>${item.nome_funcionario}</b><br>
-                        Nome Filial: <b id='nome_filial'>${item.nome_filial}</b><br>
+                        Nome Filial: <b id='filial1'>${item.nome_filial}</b><br>
                         R$ <b id='salario'>${item.salario}</b><br>
                         Setor: <b id='setor'>${item.setor}</b><br>
                         Status: <b id='status'>${item.status}</b><br>
@@ -85,7 +65,7 @@ function CarregarFinanceiro() {
                     <div class='cartoes'>
                         Nº Matrícula: <b id='matricula'>${item.matricula}</b><br>
                         Nome Completo: <b id='nome'>${item.nome_funcionario}</b><br>
-                        Nome Filial: <b id='nome_filial'>${item.nome_filial}</b><br>
+                        Nome Filial: <b id='filial1'>${item.nome_filial}</b><br>
                         R$ <b id='salario'>${item.salario}</b><br>
                         Setor: <b id='setor'>${item.setor}</b><br>
                         Status: <b id='status'>${item.status}</b><br>
@@ -100,6 +80,25 @@ function CarregarFinanceiro() {
     });
 }
 
+function CarregarFiliais() {
+    $.ajax({
+        url: 'http://localhost:3000/filial',
+        type: 'GET',
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (dados) {
+            dados.forEach(function (item) {
+                $("#caixa_filial,#filial3").append(`
+                    <option value="${item.codigo_filial}">${item.nome_filial}</option>
+                `);
+            });
+        },
+        error: function () {
+            alert("Falha ao acessar o Endpoint GET /filial");
+        }
+    });
+}
+
 
 $(document).ready(function () {
     $("#campos_null").hide();
@@ -110,6 +109,9 @@ $(document).ready(function () {
     $("#formulario_alterar").hide();
     $(".container_gen_fun").hide();
     CarregarFiliais();
+    CarregarAdministrativo();
+    CarregarSuporte();
+    CarregarFinanceiro();
 });
 
 $("#btn_entrar").click(function () {
@@ -143,8 +145,8 @@ $("#formulario_cad_fun").click(function () {
     $("#cadastro_funcionario").show();
 
     $("#btn_cad").click(function () {
-        const nome = $("#nome").val();
-        const salario = $("#salario").val();
+        const nome = $("#nome2").val();
+        const salario = $("#salario2").val();
         const setor = $("#caixa_setor").val();
         const status = $("#caixa_situacao").val();
         const filial = $("#caixa_filial").val();
@@ -178,7 +180,7 @@ $("#formulario_cad_filial").click(function () {
     $("#cadastro_filial").show();
 
     $("#btn_cad2").click(function () {
-        const nome_filial = $("#nome_filial").val();
+        const nome_filial = $("#nome_filial_cad").val();
         const endereco = $("#endereco").val();
 
         $.ajax({
@@ -186,12 +188,12 @@ $("#formulario_cad_filial").click(function () {
             type: 'POST',
             dataType: 'json',
             contentType: 'application/json',
-            data: JSON.stringify({nome_filial,endereco}),
-            success: function(resposta){
+            data: JSON.stringify({ nome_filial, endereco }),
+            success: function (resposta) {
                 alert(resposta.msg);
             },
-            error: function(){
-              alert("Falha ao acessar o Endpoint POST /filial");  
+            error: function () {
+                alert("Falha ao acessar o Endpoint POST /filial");
             }
         });
     });
@@ -205,39 +207,71 @@ $("#btn_fechar").click(function () {
 $("#formulario_gen_fun").click(function () {
     $(".content").hide();
     $(".container_gen_fun").show();
-    CarregarAdministrativo();
-    CarregarSuporte();
-    CarregarFinanceiro();
 });
 
-$(document).on('click','.cartoes', function(){
+$(document).on('click', '.cartoes', function () {
     $("#tela_escura").show();
     $("#formulario_alterar").show();
-    CarregarAdministrativo();
-    CarregarSuporte();
-    CarregarFinanceiro();
-    CarregarFiliais();
 
     var matricula = $(this).find("#matricula").text();
-    $("#matricula2").val(matricula);
-    
-    var nome = $(this).find("#nome").text();
-    $("#nome2").val(nome);
+    $("#matricula3").val(matricula);
 
-    var salario = $(this).find("#salario").text();
-    $("#salario2").val(salario);
+    var nomeSemAlter = $(this).find("#nome").text();
+    $("#nome3").val(nomeSemAlter);
 
-    var setor = $(this).find("#setor").text();
-    $("#setor2").val(setor);
+    var salarioSemAlter = $(this).find("#salario").text();
+    $("#salario3").val(salarioSemAlter);
 
-    var status = $(this).find("#status").text();
-    $("#status2").val(status);
+    var setorSemAlter = $(this).find("#setor").text();
+    $("#setor3").val(setorSemAlter);
 
-    var filial = $(this).find("#nome_filial").text();
-    $("#caixa_filial2").val(filial);
+    var statusSemAlter = $(this).find("#status").text();
+    $("#status3").val(statusSemAlter);
+
+    var filialSemAlter = $(this).find("#filial1").text();
+    $("#filial3").val(filial);
+
+    var nome = $("#nome3").val();
+    var salario = $("#salario3").val();
+    var setor = $("#setor3").val();
+    var status = $("#status3").val();
+    var filial = $("#filial3").val();
+
+    $("#salvar").click(function () {
+        $.ajax({
+            url: 'http://localhost:3000/funcionario',
+            type: 'PUT',
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify({matricula,nome,salario,setor,status,filial}),
+            success: function(resposta){
+                alert(resposta.msg);
+                window.location.href = '/';
+            },
+            error: function(){
+                alert("Falha na conexao do Endpoint PUT /funcionario");
+            }
+        })
+    });
+    $("#exclui").click(function(){
+        $.ajax({
+             url: 'http://localhost:3000/funcionario',
+            type: 'DELETE',
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify({matricula}),
+            success: function(resposta){
+                alert(resposta.msg);
+                window.location.href = '/';
+            },
+            error: function(){
+                alert("Falha na conexao do Endpoint DELETE /funcionario");
+            }
+        })
+    });
 });
 
-$(document).on('click','#btn_fechar1',function(){
+$(document).on('click', '#btn_fechar1', function () {
     $("#tela_escura").hide();
     $("#formulario_alterar").hide();
 });

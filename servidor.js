@@ -125,6 +125,15 @@ app.put('/funcionario',(req,res)=>{
     });
 });// fim do atulização funcionario
 
+app.delete('/funcionario',(req,res)=>{
+    const {matricula} = req.body;
+    db.query('DELETE FROM funcionarios WHERE matricula = ?',[matricula],(error,resultado)=>{
+        if(error){return res.json({msg:"Falha ao deletar funcionario! "+error})}
+        if(resultado.length === 0){return res.json({msg:"Nenhum funcionario foi deletado!!!"})}
+        return res.json({msg:"funcionario deletado com sucesso!!!"});
+    });
+});
+
 app.get('/filial',(req,res)=>{
     db.query('SELECT *FROM filiais',(error,resultado)=>{
         if(error){return res.json({msg:"Falha em consultar filias"})}

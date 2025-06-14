@@ -13,7 +13,7 @@
   
   body {
     font-family: 'Roboto', sans-serif;
-    background-color: #f4f4f4;
+    background-color: var(--Branca);
   }
   
   .container {
@@ -31,6 +31,7 @@
     flex-direction: column;
     padding: 20px;
     position: fixed;
+    box-shadow: 0px 0px 20px gray;
   }
   
   .logo {
@@ -39,8 +40,8 @@
   }
   
   .logo img {
-    width: 150px;
-    margin-bottom: 10px;
+    width: 180px;
+    margin-top: 10px;
   }
   
   .logo .slogan {
@@ -73,8 +74,9 @@
 
   .content {
     flex: 1;
-    background-color: var(--Branca);
     padding: 40px;
+    margin-left: 285px;
+    margin-bottom: 40px;
   }
   
   .content h2 {
@@ -247,14 +249,22 @@
 .container_gen_fun{
   display: flex;
   justify-content: space-evenly;
-  gap: 30%;
+  gap: 15%;
   margin-left: 300px;
 }
 .cartoes{
-  height: 25%;
-  width: 100%;
+  height: 200px;
+  width: 300px;
   margin-top: 40px;
-  border: 2px solid var(--Preta);
+  background-color: var(--Branca);
+ border-radius: 10px 10px 10px 10px;
+ padding: 20px;
+ box-shadow: 0px 0px 15px;
+ cursor: pointer;
+ transition: all 0.3s;
+}
+.cartoes:hover{
+ scale: 1.1;
 }
 #cadastro_filial h1{
   margin-left: 13px;
