@@ -3,7 +3,7 @@ const db = mysql.createConnection({
     host: '127.0.0.1',
     port: 3306,
     user: 'root',
-    password: '88170598',
+    password: '',
     database: 'rh_gestao'
 });
 db.connect((erro)=>{

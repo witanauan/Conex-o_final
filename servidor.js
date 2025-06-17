@@ -19,6 +19,10 @@ app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'publico', 'login.html'));
 });
 
+app.get('/funcoes_login', (req, res) => {
+    res.sendFile(path.join(__dirname, 'publico', 'user.js'));
+});
+
 app.get('/login_estilo', (req, res) => {
     res.sendFile(path.join(__dirname, 'publico', 'estilo.css'));
 });
@@ -70,36 +74,36 @@ app.get('/logout', (req, res) => {
     });
 });
 
-app.get('/',(req, res) => {
+app.get('/',verificarAutenticado,(req, res) => {
     res.sendFile(path.join(__dirname, 'privado', 'index.html'));
 });
 
-app.get('/estilo_index', (req, res) => {
+app.get('/estilo_index',(req, res) => {
     res.sendFile(path.join(__dirname, 'privado', 'style.css'));
 });
 
-app.get('/Administrativo',(req,res)=>{ 
+app.get('/Administrativo',verificarAutenticado,(req,res)=>{ 
     db.query(`SELECT *FROM funcionarios_com_filiais WHERE setor = 'Administrativo'`,(error,resultados)=>{
         if(error){return res.json({msg:"Falha ao consultar setor Administrativo! "+error})}
         return res.json(resultados);
     });
 });// fim do GET funcionarios do setor Administrativo
 
-app.get('/Suporte',(req,res)=>{
+app.get('/Suporte',verificarAutenticado,(req,res)=>{
     db.query(`SELECT *FROM funcionarios_com_filiais WHERE setor = 'Suporte'`,(error,resultados)=>{
         if(error){return res.json({msg:"Falha ao consultar setor Administrativo! "+error})}
         return res.json(resultados);
     });
 });// fim do GET funcionarios do setor Suporte
 
-app.get('/Financeiro',(req,res)=>{
+app.get('/Financeiro',verificarAutenticado,(req,res)=>{
     db.query(`SELECT *FROM funcionarios_com_filiais WHERE setor = 'Financeiro'`,(error,resultados)=>{
         if(error){return res.json({msg:"Falha ao consultar setor Administrativo! "+error})}
         return res.json(resultados);
     });
 });// fim do GET funcionarios do setor financeiro
 
-app.post('/filial',(req,res)=>{
+app.post('/filial',verificarAutenticado,(req,res)=>{
     const {nome_filial,endereco} = req.body;
     db.query(`INSERT INTO filiais(nome_filial,endereco) VALUES (?,?)`,[nome_filial,endereco],(error,resultado)=>{
         if(error){return res.json({msg:"Falha ao cadastrar filial! "+error})}
@@ -107,7 +111,7 @@ app.post('/filial',(req,res)=>{
     });
 });// fim do cadastro filial
 
-app.post('/funcionario',(req,res)=>{
+app.post('/funcionario',verificarAutenticado,(req,res)=>{
     const {nome,salario,setor,status,filial} = req.body;
     db.query('INSERT INTO funcionarios(nome,salario,setor,status,filial) VALUES (?,?,?,?,?)',
     [nome,salario,setor,status,filial],(error,resultado)=>{
@@ -116,16 +120,17 @@ app.post('/funcionario',(req,res)=>{
     });
 });//fim do cadastro funcionario
 
-app.put('/funcionario',(req,res)=>{
+app.put('/funcionario',verificarAutenticado,(req,res)=>{
     const {matricula,nome,salario,setor,status,filial} = req.body;
     db.query('UPDATE funcionarios SET nome = ?,salario = ?,setor = ?,status = ?,filial = ? WHERE matricula = ?',
     [nome,salario,setor,status,filial,matricula],(error,resultado)=>{
         if(error){return res.json({msg:"Falha ao atualizar funcionario! "+error})}
+        if(resultado.affectedRows === 0){return res.json({msg:"Nenhum funcionario foi alterado!"})}
         return res.json({msg:"Atualizada com sucesso!!!"});
     });
 });// fim do atulização funcionario
 
-app.delete('/funcionario',(req,res)=>{
+app.delete('/funcionario',verificarAutenticado,(req,res)=>{
     const {matricula} = req.body;
     db.query('DELETE FROM funcionarios WHERE matricula = ?',[matricula],(error,resultado)=>{
         if(error){return res.json({msg:"Falha ao deletar funcionario! "+error})}
@@ -134,7 +139,7 @@ app.delete('/funcionario',(req,res)=>{
     });
 });
 
-app.get('/filial',(req,res)=>{
+app.get('/filial',verificarAutenticado,(req,res)=>{
     db.query('SELECT *FROM filiais',(error,resultado)=>{
         if(error){return res.json({msg:"Falha em consultar filias"})}
         res.json(resultado);

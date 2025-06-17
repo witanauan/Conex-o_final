@@ -31,13 +31,13 @@
     </div>
     <div class="container_gen_fun">
       <div class="Administrativo">
-        <center><h1> Administrativo </h1></center>
+        <h1> Administrativo </h1>
       </div>
       <div class="Financeiro">
-        <center><h1> Financeiro </h1></center>
+        <h1> Financeiro </h1>
       </div>
       <div class="Suporte">
-        <center><h1> Suporte </h1></center>
+        <h1> Suporte </h1>
       </div>
     </div>
   </div>
@@ -49,7 +49,7 @@
           <label for="">Nome Filial</label> <br>
           <input type="text" id="nome_filial_cad" placeholder="nome filial"> <br> <br>
           <label for="">Endereço</label> <br>
-          <input type="text" id="endereco" placeholder="endereço"> <br> <br>
+          <input type="text" id="endereco1" placeholder="endereço"> <br> <br>
           <button id="btn_cad2">Cadastrar</button> <br>
       </div>
       <!-- Fim do primeiro form -->
@@ -59,9 +59,11 @@
         <label >Nome</label>  <br>
         <input type="text" id="nome2" placeholder="nome"> <br> <br>
         <label >Filial</label><br>
-        <select  id="caixa_filial"><option value="">Selecione</option></select> <br><br>
+        <select  id="caixa_filial">
+          <option value="">Selecione</option>
+        </select> <br><br>
             <label >Salário</label> <br>
-            <input type="text" id="salario2" placeholder="salario"> <br> <br>
+            <input type="number" id="salario2" placeholder="salario"> <br> <br>
                 <label >Setor</label><br>
               <select  id="caixa_setor">
                 <option value="">Selecione</option>
@@ -81,7 +83,7 @@
         <button id="btn_fechar1">X</button> 
         <h1>Alterar Funcionário</h1> <br>
         <label for="">Matrícula</label> <br> 
-        <input type="text" id="matricula3"> <br> <br>
+        <input type="text" id="matricula3" disabled> <br> <br>
         <label for="">Nome</label> <br> 
         <input type="text" id="nome3" placeholder="Nome Completo de Exemplo"> <br> <br>
         <label >Filial</label> <br>
@@ -89,7 +91,7 @@
                 <option value="">Selecione</option>               
         </select> <br><br>
         <label >Salário</label> <br>
-        <input type="text" id="salario3" placeholder="salário"> <br> <br>
+        <input type="number" id="salario3" placeholder="salário"> <br> <br>
         <label >Setor</label> <br>
         <select  id="setor3">
                 <option value="">Selecione</option>

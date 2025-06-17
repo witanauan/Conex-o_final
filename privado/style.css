@@ -249,8 +249,9 @@
 .container_gen_fun{
   display: flex;
   justify-content: space-evenly;
-  gap: 15%;
+  gap: 10%;
   margin-left: 300px;
+  margin-top: 25px;
 }
 .cartoes{
   height: 200px;
@@ -268,5 +269,28 @@
 }
 #cadastro_filial h1{
   margin-left: 13px;
+  font-size: 25px;
+}
+
+.Administrativo{
+  margin-left: 40px;
+}
+
+.Administrativo h1{
+  margin-left: 15px;
+}
+.Financeiro h1{
+  margin-left: 15px;
+}
+
+.Suporte h1{
+  margin-left: 15px;
+}
+
+#cadastro_funcionario h1{
+ font-size: 25px;
+}
+
+#formulario_alterar h1{
   font-size: 25px;
 }

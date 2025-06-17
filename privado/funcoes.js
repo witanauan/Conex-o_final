@@ -101,8 +101,6 @@ function CarregarFiliais() {
 
 
 $(document).ready(function () {
-    $("#campos_null").hide();
-    $("#info-erradas").hide();
     $("#tela_escura").hide();
     $("#cadastro_filial").hide();
     $("#cadastro_funcionario").hide();
@@ -112,31 +110,6 @@ $(document).ready(function () {
     CarregarAdministrativo();
     CarregarSuporte();
     CarregarFinanceiro();
-});
-
-$("#btn_entrar").click(function () {
-    const username = $("#username").val();
-    const password = $("#password").val();
-
-    if (username == "" || password == "") {
-        $("#campos_null").show();
-        return;
-    }
-    $.ajax({
-        url: 'http://localhost:3000/fazer_login',
-        type: 'POST',
-        dataType: 'json',
-        contentType: 'application/json',
-        data: JSON.stringify({ username, password }),
-        success: function (resposta) {
-            if (resposta.msg == "logado com sucesso!!!") {
-                window.location.href = '/';
-            }
-        },
-        error: function () {
-            alert("Falha ao acessar o Endpoint POST /fazer_login");
-        }
-    })
 });
 
 // cadastro de funcionario
@@ -150,6 +123,11 @@ $("#formulario_cad_fun").click(function () {
         const setor = $("#caixa_setor").val();
         const status = $("#caixa_situacao").val();
         const filial = $("#caixa_filial").val();
+
+        if(nome === "" ||salario === "" ||setor === "" ||status === "" ||filial === ""){
+            alert("Preencha todos os campos");
+            return;
+        }
 
         $.ajax({
             url: 'http://localhost:3000/funcionario',
@@ -181,16 +159,20 @@ $("#formulario_cad_filial").click(function () {
 
     $("#btn_cad2").click(function () {
         const nome_filial = $("#nome_filial_cad").val();
-        const endereco = $("#endereco").val();
-
+        const endereco = $("#endereco1").val();
+        if(nome_filial === "" ||endereco === ""){
+            alert("Preencha todos os campos");
+            return;
+        }
         $.ajax({
             url: 'http://localhost:3000/filial',
             type: 'POST',
             dataType: 'json',
             contentType: 'application/json',
-            data: JSON.stringify({ nome_filial, endereco }),
+            data: JSON.stringify({nome_filial,endereco}),
             success: function (resposta) {
                 alert(resposta.msg);
+                window.location.href = '/';
             },
             error: function () {
                 alert("Falha ao acessar o Endpoint POST /filial");
@@ -213,8 +195,8 @@ $(document).on('click', '.cartoes', function () {
     $("#tela_escura").show();
     $("#formulario_alterar").show();
 
-    var matricula = $(this).find("#matricula").text();
-    $("#matricula3").val(matricula);
+    var matriculaSemAlter = $(this).find("#matricula").text();
+    $("#matricula3").val(matriculaSemAlter);
 
     var nomeSemAlter = $(this).find("#nome").text();
     $("#nome3").val(nomeSemAlter);
@@ -229,16 +211,28 @@ $(document).on('click', '.cartoes', function () {
     $("#status3").val(statusSemAlter);
 
     var filialSemAlter = $(this).find("#filial1").text();
-    $("#filial3").val(filial);
 
-    var nome = $("#nome3").val();
-    var salario = $("#salario3").val();
-    var setor = $("#setor3").val();
-    var status = $("#status3").val();
-    var filial = $("#filial3").val();
+    $('#filial3 option').filter(function() {
+        return ($(this).text() === filialSemAlter);
+    }).prop('selected', true);
 
     $("#salvar").click(function () {
-        $.ajax({
+        const matricula = $("#matricula3").val();
+        const nome = $("#nome3").val();
+        const salario = $("#salario3").val();
+        const setor = $("#setor3").val();
+        const status = $("#status3").val();
+        const filial = $("#filial3").val();
+        
+        if(nome === "" ||salario === "" ||setor === "" ||status === "" ||filial === "" || matricula === ""){
+            alert("Preencha todos os campos");
+            return;
+        }else if(matriculaSemAlter != matricula){
+            alert("não mude o id da caixa");
+            return;
+        }
+
+       $.ajax({
             url: 'http://localhost:3000/funcionario',
             type: 'PUT',
             dataType: 'json',
@@ -254,6 +248,13 @@ $(document).on('click', '.cartoes', function () {
         })
     });
     $("#exclui").click(function(){
+        const matricula = $("#matricula3").val();
+
+        if(matriculaSemAlter != matricula){
+            alert("não mude o id da caixa");
+            return;
+        }
+
         $.ajax({
              url: 'http://localhost:3000/funcionario',
             type: 'DELETE',
