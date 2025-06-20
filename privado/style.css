@@ -137,6 +137,10 @@
     border-radius: 2px 2px 2px 2px;
     color: var(--Branca);
     cursor: pointer;
+    transition: all 0.5s;
+}
+#btn_cad:hover,#btn_cad2:hover{
+  scale: 1.1;
 }
 
 #cadastro_filial input{
@@ -212,7 +216,12 @@
     border-radius: 2px 2px 2px 2px;
     color: var(--Branca);
     cursor: pointer;
+    transition: all 0.5s;
 }
+#salvar:hover{
+  scale: 1.1;
+}  
+
 #exclui{
     padding: 3px;
     border: none;
@@ -223,7 +232,11 @@
     border-radius: 2px 2px 2px 2px;
     color: var(--Branca);
     cursor: pointer;
+    transition: all 0.5s;
 }
+#exclui:hover{
+  scale: 1.1;
+}  
 
 #formulario_alterar input{
    margin-left: 10px;

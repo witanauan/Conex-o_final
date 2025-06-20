@@ -1,4 +1,18 @@
 //funcoes
+function marcarErro(id) {
+    $(id).css({
+        border: "3px solid red",
+        "box-shadow": "2px 2px 2px red"
+    });
+}
+
+function desmarcarErro(id) {
+    $(id).css({
+        border: "",
+        "box-shadow": ""
+    });
+}
+
 function CarregarAdministrativo() {
     $.ajax({
         url: 'http://localhost:3000/Administrativo',
@@ -106,10 +120,36 @@ $(document).ready(function () {
     $("#cadastro_funcionario").hide();
     $("#formulario_alterar").hide();
     $(".container_gen_fun").hide();
+    $(".campos-null").hide();
     CarregarFiliais();
     CarregarAdministrativo();
     CarregarSuporte();
     CarregarFinanceiro();
+});
+
+$("#nome2").click(function(){
+    desmarcarErro("#nome2");
+    $(".campos-null").hide();
+});
+
+$("#salario2").click(function(){
+    desmarcarErro("#salario2");
+    $(".campos-null").hide();
+});
+
+$("#caixa_setor").click(function(){
+    desmarcarErro("#caixa_setor");
+    $(".campos-null").hide();
+});
+
+$("#caixa_situacao").click(function(){
+    desmarcarErro("#caixa_situacao");
+    $(".campos-null").hide();
+});
+
+$("#caixa_filial").click(function(){
+    desmarcarErro("#caixa_filial");
+    $(".campos-null").hide();
 });
 
 // cadastro de funcionario
@@ -123,9 +163,23 @@ $("#formulario_cad_fun").click(function () {
         const setor = $("#caixa_setor").val();
         const status = $("#caixa_situacao").val();
         const filial = $("#caixa_filial").val();
-
+        if(nome == ""){
+            marcarErro("#nome2");
+        }
+        if(salario == ""){
+            marcarErro("#salario2");
+        }
+        if(setor == ""){
+            marcarErro("#caixa_setor");
+        }
+        if(status == ""){
+            marcarErro("#caixa_situacao");
+        }
+        if(filial == ""){
+            marcarErro("#caixa_filial")
+        }
         if(nome === "" ||salario === "" ||setor === "" ||status === "" ||filial === ""){
-            alert("Preencha todos os campos");
+            $(".campos-null").show();
             return;
         }
 
@@ -153,6 +207,16 @@ $("#btn_fechar1").click(function () {
 // fim cadastro de funcionario
 
 // cadastro de filial
+$("#nome_filial_cad").click(function(){
+    desmarcarErro("#nome_filial_cad");
+    $(".campos-null").hide();
+});
+
+$("#endereco1").click(function(){
+    desmarcarErro("#endereco1");
+    $(".campos-null").hide();
+});
+
 $("#formulario_cad_filial").click(function () {
     $("#tela_escura").show();
     $("#cadastro_filial").show();
@@ -160,8 +224,15 @@ $("#formulario_cad_filial").click(function () {
     $("#btn_cad2").click(function () {
         const nome_filial = $("#nome_filial_cad").val();
         const endereco = $("#endereco1").val();
+        
+        if(nome_filial == ""){
+            marcarErro("#nome_filial_cad");
+        }
+        if(endereco == ""){
+            marcarErro("#endereco1");
+        }
         if(nome_filial === "" ||endereco === ""){
-            alert("Preencha todos os campos");
+            $(".campos-null").show();
             return;
         }
         $.ajax({
